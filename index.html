@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-Tradeloop - Sustainable Bartering</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>E-Tradeloop</h1>
+        <div id="user-profile" class="hidden">
+            <span id="username-display"></span> | Points: <span id="points-display">0</span>
+            <button onclick="logout()">Logout</button>
+        </div>
+    </header>
+
+    <!-- Auth Modal -->
+    <div id="auth-modal" class="modal active">
+        <div class="modal-content">
+            <h2 id="auth-title">Login</h2>
+            <input id="username" placeholder="Username" required>
+            <input id="password" type="password" placeholder="Password" required>
+            <input id="email" placeholder="Email (for registration)" style="display:none;">
+            <div class="modal-buttons">
+                <button id="auth-main-btn" onclick="login()">Login</button>
+                <button id="auth-toggle-btn" onclick="toggleAuthMode()">Need an account? Register</button>
+            </div>
+            <p id="auth-error" class="error"></p>
+        </div>
+    </div>
+
+    <!-- Add Item Modal -->
+    <div id="add-item-modal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('add-item-modal')">&times;</span>
+            <h2>Add New Item</h2>
+            <input id="item-name" placeholder="Item Name" required>
+            <textarea id="item-description" placeholder="Description" required></textarea>
+            <button onclick="addItem()">Add Item</button>
+            <p id="add-item-error" class="error"></p>
+        </div>
+    </div>
+
+    <main id="app" class="hidden">
+        <section id="dashboard">
+            <h2>Welcome, <span id="welcome-user"></span>!</h2>
+            <p>Your Points: <span id="welcome-points"></span></p>
+            <button onclick="openModal('add-item-modal')">+ Add New Item</button>
+        </section>
+
+        <div id="loading" class="loading hidden">Loading items...</div>
+
+
+        <section id="items-section">
+            <h2>Available Items for Trade</h2>
+            <input id="search" placeholder="Search items..." onkeyup="filterItems()">
+            <div id="items-grid" class="grid"></div>
+        </section>
+
+        <section id="trades-section">
+            <h2>Your Trades</h2>
+            <div id="trades-list"></div>
+        </section>
+    </main>
+
+    <div id="toast" class="toast"></div>
+    <script src="app.js"></script>
+</body>
+</html>
